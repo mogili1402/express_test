@@ -9,3 +9,7 @@ app.post("/doichecking",(req,res)=>{
     console.log(data)
     res.send("Thanks for subscribing")
 })
+PORT=
+app.listen(PORT,()=>{
+    console.log("App  is listening on ",PORT)
+})
