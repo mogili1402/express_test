@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Boilerplate Service Worker</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="css/reset.css">
+	<link rel="stylesheet" href="css/style.css">
+	
+</head>
+<body>
+	<div class="container">
+		<h1>Boilerplate Service Worker</h1>
+
+		<p>Below is an image of Earth from NASA</p>
+
+		<p><img src="" alt="Image of Earth from Nasa" class="targetImage"></p>		
+	</div>
+    <!-- <script src="js/app.js"></script> -->
+
+    <script type="application/javascript" src="https://sdki.truepush.com/sdk/v2.0.4/app.js" async></script>
+    <script>
+    var truepush = window.truepush || [];
+            
+    truepush.push(function(){
+        truepush.Init({
+            id: "63e25334c25b0b5a133b8e21"
+        },function(error){
+          if(error) console.error(error);
+        })
+    })
+    </script>
+</body>
+</html>
