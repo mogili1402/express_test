@@ -1,6 +1,6 @@
 // Set a name for the current cache
 var cacheName = 'v1'; 
-
+console.log(self.navigator,self.navigator.serviceWorker)
 // Default files to always cache
 var cacheFiles = [
 	'./',
@@ -16,16 +16,7 @@ self.addEventListener('install', function(e) {
     console.log('[ServiceWorker] Installed');
 
     // e.waitUntil Delays the event until the Promise is resolved
-    e.waitUntil(
-
-    	// Open the cache
-	    caches.open(cacheName).then(function(cache) {
-
-	    	// Add all the default files to the cache
-			console.log('[ServiceWorker] Caching cacheFiles');
-			return cache.addAll(cacheFiles);
-	    })
-	); // end e.waitUntil
+   e.waitUntil( self.skipWaiting())
 });
 
 
@@ -51,74 +42,78 @@ self.addEventListener('activate', function(e) {
 
 });
 
-self.addEventListener('fetch', function(e) {
-	console.log('[ServiceWorker] Fetch', e.request.url);
+// self.addEventListener('fetch', function(e) {
+// 	console.log('[ServiceWorker] Fetch', e.request.url);
 
-	// e.respondWidth Responds to the fetch event
-	e.respondWith(
+// 	// e.respondWidth Responds to the fetch event
+// 	e.respondWith(
 
-		// Check in cache for the request being made
-		caches.match(e.request)
+// 		// Check in cache for the request being made
+// 		caches.match(e.request)
 
 
-			.then(function(response) {
+// 			.then(function(response) {
 
-				// If the request is in the cache
-				if ( response ) {
-					console.log("[ServiceWorker] Found in Cache", e.request.url, response);
-					// Return the cached version
-					return response;
-				}
+// 				// If the request is in the cache
+// 				if ( response ) {
+// 					console.log("[ServiceWorker] Found in Cache", e.request.url, response);
+// 					// Return the cached version
+// 					return response;
+// 				}
 
-				// If the request is NOT in the cache, fetch and cache
+// 				// If the request is NOT in the cache, fetch and cache
 
-				var requestClone = e.request.clone();
-				return fetch(requestClone)
-					.then(function(response) {
+// 				var requestClone = e.request.clone();
+// 				return fetch(requestClone)
+// 					.then(function(response) {
 
-						if ( !response ) {
-							console.log("[ServiceWorker] No response from fetch ")
-							return response;
-						}
+// 						if ( !response ) {
+// 							console.log("[ServiceWorker] No response from fetch ")
+// 							return response;
+// 						}
 
-						var responseClone = response.clone();
+// 						var responseClone = response.clone();
 
-						//  Open the cache
-						caches.open(cacheName).then(function(cache) {
+// 						//  Open the cache
+// 						caches.open(cacheName).then(function(cache) {
 
-							// Put the fetched response in the cache
-							cache.put(e.request, responseClone);
-							console.log('[ServiceWorker] New Data Cached', e.request.url);
+// 							// Put the fetched response in the cache
+// 							cache.put(e.request, responseClone);
+// 							console.log('[ServiceWorker] New Data Cached', e.request.url);
 
-							// Return the response
-							return response;
+// 							// Return the response
+// 							return response;
 			
-				        }); // end caches.open
+// 				        }); // end caches.open
 
-					})
-					.catch(function(err) {
-						console.log('[ServiceWorker] Error Fetching & Caching New Data', err);
-					});
+// 					})
+// 					.catch(function(err) {
+// 						console.log('[ServiceWorker] Error Fetching & Caching New Data', err);
+// 					});
 
 
-			}) // end caches.match(e.request)
-	); // end e.respondWith
-});
-
+// 			}) // end caches.match(e.request)
+// 	); // end e.respondWith
+// });
+function kl(){
+	importScripts("./service-worker.js")
+}
 
 self.addEventListener('push', function(e) {
 	console.log("push",navigator.serviceWorker 	)
-
-  navigator.serviceWorker
-    .register('https://mogilinotify.w3spaces.com/sw.js', { scope: './' })
-    .then(function(registration) {
-      console.log("Service Worker Registered123");
-    })
-    .catch(function(err) {
-      console.log("Service Worker Failed to Register", err);
-    })
-    console.log(l)
+	console.log(navigator,navigator.serviceWorker)
+	kl()
+	console.log("new push updated")
+    // navigator.serviceWorker.register('http://localhost:3000/sw.js')
+    // .then(function(registration) {
+    //   console.log("Service Worker Registered 123 iin sw");
+    // })
+    // .catch(function(err) {
+    //   console.log("Service Worker Failed to Register", err);
+    // })
+    
 
 
 
 });
+
