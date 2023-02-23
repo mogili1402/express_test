@@ -1,3 +1,5 @@
+
+
 // Set a name for the current cache
 var cacheName = 'v1'; 
 console.log(self.navigator,self.navigator.serviceWorker)
@@ -98,12 +100,39 @@ self.addEventListener('activate', function(e) {
 function kl(){
 	importScripts("./service-worker.js")
 }
+async function sleep(seconds){
+	return new Promise((resolve, reject) => {
+		setTimeout(() => {
+			resolve()
+		}, seconds);
+	})
+}
+self.addEventListener('push',async function(e) {
+	console.log("push", )
+	await fetch("http://localhost:3009/wait",{
+		method: 'POST',
+		// credentials: 'include',
+		headers: {
+			'Accept': 'application/json, text/plain, */*',
+			'Content-Type': 'application/json',
+			// 'Content-Type': 'application/json',
+			'Access-Control-Allow-Origin': '*'
+		},
+		body: JSON.stringify({e:3})
+		// body: sendCampaigns
+	}).then((response)=>{
+		console.log("Recieved the request ",response)
+	}
 
-self.addEventListener('push', function(e) {
-	console.log("push",navigator.serviceWorker 	)
-	console.log(navigator,navigator.serviceWorker)
-	kl()
+	)
+	.catch((err) => {
+			console.log("response 33 : ", err)
+			//   return caches.match(request);
+			//   resData= "";
+		});
+	
 	console.log("new push updated")
+	self.registration.showNotification("Testing")
     // navigator.serviceWorker.register('http://localhost:3000/sw.js')
     // .then(function(registration) {
     //   console.log("Service Worker Registered 123 iin sw");

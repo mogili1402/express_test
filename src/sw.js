@@ -17,7 +17,7 @@ else {
 
 
     else {
-        host = "https://sdki.truepush.com/sdk/";
+        host = "http://localhost:8010/sdk/";
     }
     swPath = host + version + "/sw.js";
 }
