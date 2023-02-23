@@ -67,7 +67,7 @@ app.post("/wait",(req,res)=>{
         res.send("COmpleted")
     }, `35000`);
 })
-PORT=process.env.PORT||3009
+PORT=process.env.PORT||3000
 app.listen(PORT,()=>{
     console.log("App  is listening on ",PORT)
 })
